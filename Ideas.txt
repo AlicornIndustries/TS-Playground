@@ -1,0 +1,26 @@
+Next steps: move code into separate files.
+
+
+
+Class Person:
+name (first/full)
+gender type
+skills in a separate file
+hasSkill with O(1) time
+stats
+
+Person extends Actor?
+Job system.
+Jobs object, an associative array of Job.
+
+Class Species:
+organic true/false
+base calorie/oxygen consumption
+steam-powered beings consume fuel and oxygen.
+
+Starstruck world, proldier crew of a spaceship?
+
+Mixins
+https://www.typescriptlang.org/docs/handbook/mixins.html
+
+Things to have mixins:
