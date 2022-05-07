@@ -1,5 +1,31 @@
 Next steps: move code into separate files.
 
+Swap this back to being TripleCrown, without ROT.JS and just doing the underlying logic for now?
+Load stuff from JSON.
+
+Class Actor
+mixins for GenderHaver, SpeciesHaver, etc.
+extends?
+Could spin off a script for turning JSON into mixins into its own project. Something like:
+
+mixin: {
+	name: "Flier",
+	requiresMixins: "Mover"
+}
+
+
+https://blog.bitsrc.io/understanding-mixins-in-typescript-3c2c9a545d87
+Has a good example of abstract mixins.
+https://www.bryntum.com/blog/the-mixin-pattern-in-typescript-all-you-need-to-know/
+
+applyMixins:
+The function above is just iterating over the parent classes, and for each one, iterating over its list of properties and defining those properties into the derived class. Essentially we’re manually linking all methods and properties from the parents into the child.
+
+
+
+Traits:
+Whirlwind: deal +3% DMG for each enemy killed this combat, max +15%. Use event listeners.
+
 
 
 Class Person:

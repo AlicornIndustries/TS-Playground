@@ -2,6 +2,48 @@ enum Gender {
     Male,Female,Nonbinary,Other,Genderless
 }
 
+// Exploring mixins
+class Entity {
+    private _name: string;
+    get name() {return this._name}
+
+    constructor(name: string) {
+        this._name = name;
+    }
+}
+
+type GConstructor<T = {}> = new (...args: any[]) => T;
+
+function Attacker<TBase extends GConstructor>(Base: TBase) {
+    return class Attacker extends Base {
+        attack() {
+            console.log("attacked!")
+        }
+    }
+}
+type Mover = GConstructor<{move(): {}}>;
+function Mover<TBase extends GConstructor>(Base: TBase) {
+    return class Mover extends Base {
+        move() {
+            console.log("moved!")
+        }
+    }
+}
+// Flier can only be added to a Mover (needs type Mover declaration above)
+function Flier<TBase extends Mover>(Base: TBase) {
+    return class Flier extends Base {
+        fly() {
+            console.log("flew!")
+        }
+    }
+}
+
+const AttackerEntity = Attacker(Entity);
+const wolf = new AttackerEntity("Wolf")
+
+
+
+/*
 class Person {
     private _name: string;
     get name() {return this._name}
@@ -57,17 +99,16 @@ class Species {
         this.isOrganic = isOrganic
     }
 }
+*/
 
 /* Setup & init */
-const human = new Species("human",true);
-const millersDrake = new Species("Miller's drake",true)
-const litholid = new Species("litholid",false)
+// const human = new Species("human",true);
+// const millersDrake = new Species("Miller's drake",true)
+// const litholid = new Species("litholid",false)
+// const alice = new Person("Alice",millersDrake,Gender.Female)
+// alice.addJob(new Job("farmer"))
 
 
-const alice = new Person("Alice",millersDrake,Gender.Female)
-alice.addJob(new Job("farmer"))
 
 window.onload = function() {
-    console.log(alice.details());
-    console.log(alice.name)
 }

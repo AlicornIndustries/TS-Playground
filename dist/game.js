@@ -7,50 +7,99 @@ var Gender;
     Gender[Gender["Other"] = 3] = "Other";
     Gender[Gender["Genderless"] = 4] = "Genderless";
 })(Gender || (Gender = {}));
+// Exploring mixins
+class Entity {
+    constructor(name) {
+        this._name = name;
+    }
+    get name() { return this._name; }
+}
+function Attacker(Base) {
+    return class Attacker extends Base {
+        attack() {
+            console.log("attacked!");
+        }
+    };
+}
+function Mover(Base) {
+    return class Mover extends Base {
+        move() {
+            console.log("moved!");
+        }
+    };
+}
+// Flier can only be added to a Mover (needs type Mover declaration above)
+function Flier(Base) {
+    return class Flier extends Base {
+        fly() {
+            console.log("flew!");
+        }
+    };
+}
+const AttackerEntity = Attacker(Entity);
+const wolf = new AttackerEntity("Wolf");
+/*
 class Person {
-    constructor(name, species, gender) {
+    private _name: string;
+    get name() {return this._name}
+    private _species: Species;
+    get species() {return this._species}
+    private _gender: Gender;
+    get gender() {return this._gender}
+    private _job: Job | null;
+    get job() {return this._job}
+
+
+    constructor(name: string, species: Species, gender: Gender) {
         this._name = name;
         this._species = species;
         this._gender = gender;
         this._job = null;
     }
-    get name() { return this._name; }
-    get species() { return this._species; }
-    get gender() { return this._gender; }
-    get job() { return this._job; }
-    addJob(job) {
+
+    addJob(job: Job) {
         this._job = job;
     }
+
     details() {
-        return `${this._name}, ${this._species.name}`;
+        return `${this._name}, ${this._species.name}`
     }
+
 }
+
 class Job {
-    constructor(name) {
+    private _name: string;
+    get name() {return this._name}
+
+    private _xp: number; // FUTURE: level up
+    get xp() {return this._xp}
+    set xp(xp: number) {
+        this._xp += xp;
+    }
+
+    constructor(name: string) {
         this._name = name;
         this._xp = 0;
     }
-    get name() { return this._name; }
-    get xp() { return this._xp; }
-    set xp(xp) {
-        this._xp += xp;
-    }
 }
+
 // FUTURE: having multiple jobs, in a JobList associative array?
+
 class Species {
-    constructor(name, isOrganic) {
+    private _name: string;
+    get name() {return this._name}
+    isOrganic: boolean;
+    constructor(name: string, isOrganic: boolean) {
         this._name = name;
-        this.isOrganic = isOrganic;
+        this.isOrganic = isOrganic
     }
-    get name() { return this._name; }
 }
+*/
 /* Setup & init */
-const human = new Species("human", true);
-const millersDrake = new Species("Miller's drake", true);
-const litholid = new Species("litholid", false);
-const alice = new Person("Alice", millersDrake, Gender.Female);
-alice.addJob(new Job("farmer"));
+// const human = new Species("human",true);
+// const millersDrake = new Species("Miller's drake",true)
+// const litholid = new Species("litholid",false)
+// const alice = new Person("Alice",millersDrake,Gender.Female)
+// alice.addJob(new Job("farmer"))
 window.onload = function () {
-    console.log(alice.details());
-    console.log(alice.name);
 };
